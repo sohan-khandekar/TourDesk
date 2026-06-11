@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000/api/v1';
+const BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1";
 
 const api = axios.create({ baseURL: BASE });
 
@@ -27,11 +27,15 @@ export interface ApiPlace {
   highlights: string[];
 }
 
-export async function fetchPlaces(city: string, category?: string, search?: string): Promise<ApiPlace[]> {
+export async function fetchPlaces(
+  city: string,
+  category?: string,
+  search?: string,
+): Promise<ApiPlace[]> {
   const params: Record<string, string> = { city };
-  if (category && category !== 'all') params.category = category;
+  if (category && category !== "all") params.category = category;
   if (search) params.search = search;
-  const { data } = await api.get<ApiPlace[]>('/places', { params });
+  const { data } = await api.get<ApiPlace[]>("/places", { params });
   return data;
 }
 
@@ -52,7 +56,7 @@ export interface ApiCity {
 }
 
 export async function fetchCities(): Promise<ApiCity[]> {
-  const { data } = await api.get<ApiCity[]>('/cities');
+  const { data } = await api.get<ApiCity[]>("/cities");
   return data;
 }
 
@@ -60,10 +64,9 @@ export async function fetchCities(): Promise<ApiCity[]> {
 // Direct booking is disabled in the current TourDesk flow. Use bookingLink from ApiPlace
 // to redirect users to the official portal instead.
 
-
 export interface BookingPayload {
   place_id: string;
-  visit_date: string;   // YYYY-MM-DD
+  visit_date: string; // YYYY-MM-DD
   adults: number;
   children: number;
   name: string;
@@ -83,7 +86,9 @@ export interface BookingResult {
   booked_at: string;
 }
 
-export async function createBooking(payload: BookingPayload): Promise<BookingResult> {
-  const { data } = await api.post<BookingResult>('/bookings', payload);
+export async function createBooking(
+  payload: BookingPayload,
+): Promise<BookingResult> {
+  const { data } = await api.post<BookingResult>("/bookings", payload);
   return data;
 }

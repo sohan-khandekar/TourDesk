@@ -1,7 +1,7 @@
 "use client";
 
-import { useI18n } from "./i18n-root";
 import type { TranslationKey } from "../lib/i18n";
+import { useI18n } from "./i18n-root";
 
 type TranslatedTextProps = {
   k: TranslationKey;

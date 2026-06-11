@@ -1,8 +1,50 @@
 [
-  { "id": "hyderabad", "name": "Hyderabad", "state": "Telangana",     "emoji": "🕌", "places": 42, "active": true  },
-  { "id": "mumbai",    "name": "Mumbai",    "state": "Maharashtra",   "emoji": "🌊", "places": 38, "active": false },
-  { "id": "delhi",     "name": "Delhi",     "state": "Delhi",         "emoji": "🏛️", "places": 55, "active": false },
-  { "id": "jaipur",    "name": "Jaipur",    "state": "Rajasthan",     "emoji": "🏯", "places": 29, "active": false },
-  { "id": "varanasi",  "name": "Varanasi",  "state": "Uttar Pradesh", "emoji": "🪔", "places": 24, "active": false },
-  { "id": "goa",       "name": "Goa",       "state": "Goa",           "emoji": "🏖️", "places": 31, "active": false }
+  {
+    "id": "hyderabad",
+    "name": "Hyderabad",
+    "state": "Telangana",
+    "emoji": "🕌",
+    "places": 42,
+    "active": true
+  },
+  {
+    "id": "mumbai",
+    "name": "Mumbai",
+    "state": "Maharashtra",
+    "emoji": "🌊",
+    "places": 38,
+    "active": false
+  },
+  {
+    "id": "delhi",
+    "name": "Delhi",
+    "state": "Delhi",
+    "emoji": "🏛️",
+    "places": 55,
+    "active": false
+  },
+  {
+    "id": "jaipur",
+    "name": "Jaipur",
+    "state": "Rajasthan",
+    "emoji": "🏯",
+    "places": 29,
+    "active": false
+  },
+  {
+    "id": "varanasi",
+    "name": "Varanasi",
+    "state": "Uttar Pradesh",
+    "emoji": "🪔",
+    "places": 24,
+    "active": false
+  },
+  {
+    "id": "goa",
+    "name": "Goa",
+    "state": "Goa",
+    "emoji": "🏖️",
+    "places": 31,
+    "active": false
+  }
 ]

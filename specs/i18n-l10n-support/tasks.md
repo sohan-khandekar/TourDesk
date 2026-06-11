@@ -17,11 +17,11 @@
 
 ## Validation
 
-- [ ] Run npm run dev.
-- [ ] Test English.
-- [ ] Test Hindi.
-- [ ] Test Marathi.
-- [ ] Run npm run build.
+- [x] Run npm run dev.
+- [x] Test English.
+- [x] Test Hindi.
+- [x] Test Marathi.
+- [x] Run npm run build.
 
 ## Documentation
 

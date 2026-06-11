@@ -27,20 +27,26 @@ test:
   stage: test
   script:
     - npm run test || true
+    - pytest --cov=backend/app --cov-report=term-missing || true
 
 coverage:
   stage: coverage
   script:
     - npm run test:coverage || true
+    - pytest --cov=backend/app --cov-report=xml --cov-report=html || true
   artifacts:
     when: always
     paths:
       - coverage/
+      - htmlcov/
+      - coverage.xml
 
 dependency_audit:
   stage: security
   script:
+    - npm audit --audit-level=critical || true
     - npm --prefix frontend audit --audit-level=critical || true
+    - uv audit || pip-audit || true
 
 secret_scan:
   stage: security

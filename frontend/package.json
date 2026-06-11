@@ -7,7 +7,8 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "knip": "knip"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -52,5 +53,8 @@
   },
   "engines": {
     "node": "24.x"
+  },
+  "devDependencies": {
+    "knip": "^6.16.1"
   }
 }

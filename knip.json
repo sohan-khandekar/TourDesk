@@ -1,0 +1,9 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "workspaces": {
+    "frontend": {
+      "entry": ["next.config.js", "app/**/page.tsx", "app/layout.tsx"],
+      "project": ["**/*.{ts,tsx,js}"]
+    }
+  }
+}

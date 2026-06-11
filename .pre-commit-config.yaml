@@ -1,0 +1,42 @@
+repos:
+  # Standard pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+
+  # Biome: Formatter and Linter (JS/TS/JSON/CSS)
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v0.6.1
+    hooks:
+      - id: biome-check
+        additional_dependencies: ["@biomejs/biome@^1.9.4"]
+
+  # ESLint: For rules not covered by Biome
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.56.0
+    hooks:
+      - id: eslint
+        additional_dependencies:
+          - eslint@8.57.1
+          - eslint-config-next@13.5.7
+
+  # Mypy: Python Type Checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.10.0
+    hooks:
+      - id: mypy
+        args: ["--ignore-missing-imports"]
+        additional_dependencies: ["pydantic>=2.0.0"]
+
+  # pip-audit: Python Dependency Security
+  - repo: https://github.com/pypa/pip-audit
+    rev: v2.7.3
+    hooks:
+      - id: pip-audit
+        args: ["-r", "backend/requirements.txt"]
+        ci:
+          skip: [pip-audit]

@@ -1,22 +1,23 @@
 "use client";
 
 import {
+  type ReactNode,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
-  type ReactNode,
 } from "react";
 import {
+  type Locale,
+  type TranslationKey,
   defaultLocale,
   dictionaries,
   isLocale,
   localeLabels,
   phraseMap,
   supportedLocales,
-  type Locale,
-  type TranslationKey,
 } from "../lib/i18n";
 
 type I18nContextValue = {
@@ -157,10 +158,10 @@ export function I18nRoot({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const setLocale = (nextLocale: Locale) => {
+  const setLocale = useCallback((nextLocale: Locale) => {
     setLocaleState(nextLocale);
     window.localStorage.setItem("tourdesk-locale", nextLocale);
-  };
+  }, []);
 
   const value = useMemo<I18nContextValue>(
     () => ({
@@ -168,7 +169,7 @@ export function I18nRoot({ children }: { children: ReactNode }) {
       setLocale,
       t: (key) => dictionaries[locale][key] ?? dictionaries.en[key],
     }),
-    [locale]
+    [locale, setLocale],
   );
 
   return (

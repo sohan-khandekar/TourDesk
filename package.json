@@ -10,14 +10,14 @@
     "lint": "biome check . || eslint frontend --ext .js,.jsx,.ts,.tsx || true",
     "start": "npm run start --workspace frontend",
     "typecheck": "npm run typecheck --workspace frontend",
-    "format:check": "biome check . || true"
+    "format:check": "biome check . || true",
+    "knip": "knip"
   },
-  "workspaces": [
-    "frontend"
-  ],
+  "workspaces": ["frontend"],
   "version": "1.0.0",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "eslint": "^8.57.1"
+    "eslint": "^8.57.1",
+    "knip": "^6.16.1"
   }
 }
