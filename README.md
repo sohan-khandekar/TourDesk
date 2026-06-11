@@ -97,3 +97,18 @@ TourDesk does **not** process ticket payments, generate ticket IDs, reserve slot
 ## License
 
 MIT
+
+
+## Multilingual Support
+
+TourDesk supports internationalization and localization.
+
+Supported languages:
+
+- English
+- Hindi
+- Marathi
+
+Users can switch languages using the language selector visible in the app. The selected language is saved in the browser and reused on the next visit.
+
+See `I18N_L10N.md` for details.
