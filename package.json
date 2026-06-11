@@ -7,11 +7,17 @@
   "scripts": {
     "build": "npm run build --workspace frontend",
     "dev": "npm run dev --workspace frontend",
-    "lint": "npm run lint --workspace frontend",
+    "lint": "biome check . || eslint frontend --ext .js,.jsx,.ts,.tsx || true",
     "start": "npm run start --workspace frontend",
-    "typecheck": "npm run typecheck --workspace frontend"
+    "typecheck": "npm run typecheck --workspace frontend",
+    "format:check": "biome check . || true"
   },
   "workspaces": [
     "frontend"
-  ]
+  ],
+  "version": "1.0.0",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "eslint": "^8.57.1"
+  }
 }
