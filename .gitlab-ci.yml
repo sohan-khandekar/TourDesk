@@ -1,4 +1,4 @@
-stages:
+format:
   - lint
   - type_check
   - test
@@ -18,8 +18,20 @@ lint:
     - npx biome check . || true
     - npx eslint frontend --ext .js,.jsx,.ts,.tsx || true
 
-type_check:
+type_check_python:
   stage: type_check
+  image: python:3.11-slim
+  before_script:
+    - pip install mypy pydantic
+  script:
+    - mypy backend/app --ignore-missing-imports
+
+type_check_js:
+  stage: type_check
+  image: node:24
+  before_script:
+    - npm install
+    - npm --prefix frontend install
   script:
     - npm --prefix frontend run typecheck
 
@@ -37,9 +49,14 @@ coverage:
   before_script:
     - pip install -r backend/requirements.txt
   script:
-    - pytest
+    - pytest --cov=backend/app --cov-report=term-missing --cov-report=xml --cov-report=html
+  coverage: '/TOTAL.*\s+(\d+%)$/'
   artifacts:
     when: always
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
     paths:
       - htmlcov/
       - coverage.xml

@@ -7,3 +7,4 @@ pandas-stubs
 mypy
 pytest
 pytest-cov
+ruff
