@@ -28,3 +28,8 @@ __pycache__/
 *.pyc
 
 *.tsbuildinfo
+
+# Coverage reports
+.coverage
+coverage.xml
+htmlcov/

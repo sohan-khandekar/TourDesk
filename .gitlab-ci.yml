@@ -25,19 +25,22 @@ type_check:
 
 test:
   stage: test
+  image: python:3.11-slim
+  before_script:
+    - pip install -r backend/requirements.txt
   script:
-    - npm run test || true
-    - pytest --cov=backend/app --cov-report=term-missing || true
+    - pytest
 
 coverage:
   stage: coverage
+  image: python:3.11-slim
+  before_script:
+    - pip install -r backend/requirements.txt
   script:
-    - npm run test:coverage || true
-    - pytest --cov=backend/app --cov-report=xml --cov-report=html || true
+    - pytest
   artifacts:
     when: always
     paths:
-      - coverage/
       - htmlcov/
       - coverage.xml
 

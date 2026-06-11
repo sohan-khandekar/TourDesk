@@ -1,5 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { AiProvider } from "../components/ai-provider";
+import AiWidget from "../components/ai-widget";
 import { I18nRoot } from "../components/i18n-root";
 
 export const metadata: Metadata = {
@@ -14,7 +16,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-white">
-        <I18nRoot>{children}</I18nRoot>
+        <AiProvider>
+          <I18nRoot>
+            {children}
+            <AiWidget />
+          </I18nRoot>
+        </AiProvider>
       </body>
     </html>
   );

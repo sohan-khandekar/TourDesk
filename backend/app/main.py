@@ -9,6 +9,7 @@ from .api.routes.places   import router as places_router
 from .api.routes.bookings import router as bookings_router
 from .api.routes.cities   import router as cities_router
 from .api.routes.meta     import router as meta_router
+from .api.routes.ai       import router as ai_router
 from .core.config import ALLOWED_ORIGINS, ALLOW_ORIGIN_REGEX, API_PREFIX, APP_NAME
 
 
@@ -40,6 +41,7 @@ def create_app() -> FastAPI:
     app.include_router(bookings_router, prefix=API_PREFIX)
     app.include_router(cities_router,   prefix=API_PREFIX)
     app.include_router(meta_router,     prefix=API_PREFIX)
+    app.include_router(ai_router,       prefix=API_PREFIX)
 
     @app.get("/")
     async def root() -> dict[str, str]:
