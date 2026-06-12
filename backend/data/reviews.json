@@ -1,0 +1,227 @@
+[
+  {
+    "id": "rev_1",
+    "place_id": "charminar",
+    "user_name": "Aditya Varma",
+    "user_occupation": "Freelance Travel Photographer",
+    "rating": 5,
+    "comment": "Outstanding details on Charminar! The info about the cashless ticket discount is super helpful and saved me money. The Laad Bazaar highlight was spot on.",
+    "created_at": "2026-06-12T07:15:00Z"
+  },
+  {
+    "id": "rev_2",
+    "place_id": "charminar",
+    "user_name": "Srinivas Rao",
+    "user_occupation": "High School History Teacher",
+    "rating": 4,
+    "comment": "Very accurate description of the 16th-century architecture. I checked the official links provided and they loaded perfectly. A great resource for my students.",
+    "created_at": "2026-06-12T06:30:00Z"
+  },
+  {
+    "id": "rev_3",
+    "place_id": "golconda_fort",
+    "user_name": "Meera Joshi",
+    "user_occupation": "Architect & Urban Planner",
+    "rating": 5,
+    "comment": "The acoustics tip at Golconda Fort works exactly as described! Excellent user interface - simple and very informative. The layout of highlights is very clean.",
+    "created_at": "2026-06-12T05:22:00Z"
+  },
+  {
+    "id": "rev_4",
+    "place_id": "golconda_fort",
+    "user_name": "Karan Malhotra",
+    "user_occupation": "Software Dev at Tech Mahindra",
+    "rating": 4,
+    "comment": "Loved the clean dark mode styling. The ticket price details and link to ASI booking made planning my weekend trip extremely easy. Highly recommended!",
+    "created_at": "2026-06-11T18:45:00Z"
+  },
+  {
+    "id": "rev_5",
+    "place_id": "qutb_shahi_tombs",
+    "user_name": "Ananya Reddy",
+    "user_occupation": "Fine Arts Student (Osmania University)",
+    "rating": 5,
+    "comment": "Beautifully cataloged. The Persian tile work highlight led me to focus on it during my visit. The links redirect cleanly. Great UX!",
+    "created_at": "2026-06-11T14:12:00Z"
+  },
+  {
+    "id": "rev_6",
+    "place_id": "chowmahalla_palace",
+    "user_name": "Vikram Sen",
+    "user_occupation": "Retired Bank Manager",
+    "rating": 4,
+    "comment": "The vintage car museum info was very accurate. The translation feature helped my wife read the details in Hindi. The interface is intuitive for seniors.",
+    "created_at": "2026-06-11T10:05:00Z"
+  },
+  {
+    "id": "rev_7",
+    "place_id": "falaknuma_palace",
+    "user_name": "Sanya Kapoor",
+    "user_occupation": "Luxury Travel Consultant",
+    "rating": 5,
+    "comment": "Falaknuma Palace booking info is spot-on. The redirect to official Taj tours page works flawlessly. Beautiful layout and visuals.",
+    "created_at": "2026-06-10T16:40:00Z"
+  },
+  {
+    "id": "rev_8",
+    "place_id": "charminar",
+    "user_name": "David Miller",
+    "user_occupation": "Expat Tourist (UK)",
+    "rating": 4,
+    "comment": "Having the exact NRI ticket price (₹300) listed on the details page was incredibly helpful. Very clean redirect flow.",
+    "created_at": "2026-06-10T12:18:00Z"
+  },
+  {
+    "id": "rev_9",
+    "place_id": "golconda_fort",
+    "user_name": "Sneha Deshmukh",
+    "user_occupation": "UI/UX Designer at Amazon Hyd",
+    "rating": 5,
+    "comment": "Great design flow! The official redirect pattern is honest and clear. No misleading booking forms, just clean utility.",
+    "created_at": "2026-06-10T09:30:00Z"
+  },
+  {
+    "id": "rev_10",
+    "place_id": "qutb_shahi_tombs",
+    "user_name": "Rahul Bose",
+    "user_occupation": "Independent Heritage Walk Organizer",
+    "rating": 5,
+    "comment": "Excellent detailed listing. I share this portal with my tour groups to help them navigate metro options and entry prices.",
+    "created_at": "2026-06-09T15:22:00Z"
+  },
+  {
+    "id": "rev_11",
+    "place_id": "chowmahalla_palace",
+    "user_name": "Elena Rostova",
+    "user_occupation": "Cultural Anthropologist",
+    "rating": 4,
+    "comment": "Nice information about Nizam's grand Durbar Hall. The website language switcher is very seamless and makes Hyderabad heritage accessible.",
+    "created_at": "2026-06-09T11:05:00Z"
+  },
+  {
+    "id": "rev_12",
+    "place_id": "falaknuma_palace",
+    "user_name": "Mohammad Ali",
+    "user_occupation": "Event Manager",
+    "rating": 5,
+    "comment": "Outstanding! The nearest metro and travel advice details are very helpful for visitors. Clean, professional look and feel.",
+    "created_at": "2026-06-08T17:55:00Z"
+  },
+  {
+    "id": "rev_13",
+    "place_id": "charminar",
+    "user_name": "Priya Nair",
+    "user_occupation": "MBA Student (ISB Hyderabad)",
+    "rating": 4,
+    "comment": "Good UI, quick load time. The info about night illumination timings helped us plan our visit at the perfect hour.",
+    "created_at": "2026-06-08T13:40:00Z"
+  },
+  {
+    "id": "rev_14",
+    "place_id": "golconda_fort",
+    "user_name": "Gautam Gambhir",
+    "user_occupation": "Marketing Director",
+    "rating": 4,
+    "comment": "Solid UX. The pricing structure details showing the difference between cash and card was really helpful.",
+    "created_at": "2026-06-07T19:10:00Z"
+  },
+  {
+    "id": "rev_15",
+    "place_id": "qutb_shahi_tombs",
+    "user_name": "Sarah Jenkins",
+    "user_occupation": "Travel Vlogger",
+    "rating": 5,
+    "comment": "Clean design, easy navigation. I used the official links to book my tickets. It's great to see a portal that doesn't try to middleman the bookings.",
+    "created_at": "2026-06-07T12:30:00Z"
+  },
+  {
+    "id": "rev_16",
+    "place_id": "chowmahalla_palace",
+    "user_name": "Rohan Das",
+    "user_occupation": "Freelance Writer",
+    "rating": 5,
+    "comment": "Extremely well organized. The list of highlights like the Durbar hall chandelier helped me take great photos.",
+    "created_at": "2026-06-06T15:50:00Z"
+  },
+  {
+    "id": "rev_17",
+    "place_id": "falaknuma_palace",
+    "user_name": "Tina D'Souza",
+    "user_occupation": "Blogger & Content Creator",
+    "rating": 5,
+    "comment": "The photos are beautiful and the design feels very premium. The Taj hotel day tour information is highly accurate.",
+    "created_at": "2026-06-06T10:12:00Z"
+  },
+  {
+    "id": "rev_18",
+    "place_id": "charminar",
+    "user_name": "Rajesh Kumar",
+    "user_occupation": "Government Employee",
+    "rating": 4,
+    "comment": "Simple and easy to understand. The language translation to Telugu/Hindi is very useful for local families.",
+    "created_at": "2026-06-05T14:40:00Z"
+  },
+  {
+    "id": "rev_19",
+    "place_id": "golconda_fort",
+    "user_name": "Deepika Padukone",
+    "user_occupation": "Media Analyst",
+    "rating": 5,
+    "comment": "Brilliant. The Sound & Light Show ticket price warning saved us from surprises. Excellent layout and fast load times.",
+    "created_at": "2026-06-05T09:20:00Z"
+  },
+  {
+    "id": "rev_20",
+    "place_id": "qutb_shahi_tombs",
+    "user_name": "Nikhil Siddhartha",
+    "user_occupation": "Wildlife & Heritage Enthusiast",
+    "rating": 4,
+    "comment": "Great documentation. The description of Persian tile work is very detailed. Glad to use this utility to discover Hyderabad.",
+    "created_at": "2026-06-04T16:15:00Z"
+  },
+  {
+    "id": "rev_21",
+    "place_id": "chowmahalla_palace",
+    "user_name": "Ayesha Khan",
+    "user_occupation": "Journalism Student at EFLU",
+    "rating": 5,
+    "comment": "Extremely user-centric. The mobile photography fee warning was highly appreciated! Love the transparent pricing guidelines.",
+    "created_at": "2026-06-04T11:00:00Z"
+  },
+  {
+    "id": "rev_22",
+    "place_id": "falaknuma_palace",
+    "user_name": "Amit Trivedi",
+    "user_occupation": "Music Producer",
+    "rating": 4,
+    "comment": "The UI feels clean and uncluttered. It was very easy to find the location and best time to visit Falaknuma. Excellent work.",
+    "created_at": "2026-06-03T18:45:00Z"
+  },
+  {
+    "id": "rev_23",
+    "place_id": "charminar",
+    "user_name": "Ritu Verma",
+    "user_occupation": "Parent & Homemaker",
+    "rating": 4,
+    "comment": "The information about children under 15 being free was very helpful for our family visit. Very easy-to-use site.",
+    "created_at": "2026-06-03T14:10:00Z"
+  },
+  {
+    "id": "rev_24",
+    "place_id": "golconda_fort",
+    "user_name": "Siddharth Malhotra",
+    "user_occupation": "Civil Engineer",
+    "rating": 5,
+    "comment": "Excellent details on the fort walls and entry routes. The metro routing advice (MG Bus Stand connection) is very accurate.",
+    "created_at": "2026-06-02T16:50:00Z"
+  },
+  {
+    "id": "rev_25",
+    "place_id": "qutb_shahi_tombs",
+    "user_name": "Kavita Rao",
+    "user_occupation": "IT Professional at Wipro",
+    "rating": 5,
+    "comment": "Perfect app to show guests around Hyderabad! Accurate timings and ticket details, and direct links to the official government sites.",
+    "created_at": "2026-06-02T10:30:00Z"
+  }
+]

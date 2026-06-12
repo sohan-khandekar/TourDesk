@@ -92,3 +92,36 @@ export async function createBooking(
   const { data } = await api.post<BookingResult>("/bookings", payload);
   return data;
 }
+
+// ── Reviews ──────────────────────────────────────────────────────────────────
+
+export interface ApiReview {
+  id: string;
+  place_id: string;
+  user_name: string;
+  user_occupation: string;
+  rating: number;
+  comment: string;
+  created_at: string;
+}
+
+export interface ReviewPayload {
+  place_id: string;
+  user_name: string;
+  user_occupation: string;
+  rating: number;
+  comment: string;
+  email: string;
+}
+
+export async function fetchReviews(placeId?: string): Promise<ApiReview[]> {
+  const params: Record<string, string> = {};
+  if (placeId) params.place_id = placeId;
+  const { data } = await api.get<ApiReview[]>("/reviews", { params });
+  return data;
+}
+
+export async function createReview(payload: ReviewPayload): Promise<ApiReview> {
+  const { data } = await api.post<ApiReview>("/reviews", payload);
+  return data;
+}

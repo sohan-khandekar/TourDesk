@@ -72,6 +72,107 @@ Rules:
 4. For attractions, note that TourDesk will redirect them to the official booking site on the details page.
 5. Keep your responses concise, welcoming, structured, and helpful. Use bullet points and markdown formatting.`;
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Direct provider call helpers — no backend proxy needed
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function callOllama(
+  endpoint: string,
+  model: string,
+  messages: Message[],
+): Promise<string> {
+  const url = `${endpoint.replace(/\/$/, "")}/api/chat`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model,
+      messages: messages.map((m) => ({ role: m.role, content: m.content })),
+      stream: false,
+    }),
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => res.statusText);
+    throw new Error(`Ollama error ${res.status}: ${text}`);
+  }
+  const data = await res.json();
+  return data?.message?.content ?? "";
+}
+
+async function callOpenAI(
+  apiKey: string,
+  model: string,
+  messages: Message[],
+): Promise<string> {
+  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model,
+      messages: messages.map((m) => ({ role: m.role, content: m.content })),
+    }),
+  });
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    const msg = data?.error?.message ?? res.statusText;
+    if (res.status === 401)
+      throw new Error("Invalid OpenAI API key. Check your key in AI Settings.");
+    if (res.status === 429)
+      throw new Error(
+        "OpenAI rate limit or quota exceeded. Check your plan on platform.openai.com.",
+      );
+    throw new Error(`OpenAI error ${res.status}: ${msg}`);
+  }
+  const data = await res.json();
+  return data?.choices?.[0]?.message?.content ?? "";
+}
+
+async function callGemini(
+  apiKey: string,
+  model: string,
+  messages: Message[],
+): Promise<string> {
+  // Gemini doesn't support a system role natively — prepend as a user turn
+  const contents: { role: string; parts: { text: string }[] }[] = [];
+  for (const m of messages) {
+    if (m.role === "system") {
+      contents.push({ role: "user", parts: [{ text: m.content }] });
+      contents.push({
+        role: "model",
+        parts: [{ text: "Understood. I will follow those instructions." }],
+      });
+    } else {
+      contents.push({
+        role: m.role === "assistant" ? "model" : "user",
+        parts: [{ text: m.content }],
+      });
+    }
+  }
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ contents }),
+  });
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    const msg = data?.error?.message ?? res.statusText;
+    if (res.status === 400 && msg.toLowerCase().includes("api key"))
+      throw new Error("Invalid Gemini API key. Check your key in AI Settings.");
+    throw new Error(`Gemini error ${res.status}: ${msg}`);
+  }
+  const data = await res.json();
+  return data?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Provider component
+// ─────────────────────────────────────────────────────────────────────────────
+
 export function AiProvider({ children }: { children: React.ReactNode }) {
   const [settings, setSettingsState] = useState<AISettings>(defaultSettings);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
@@ -127,36 +228,49 @@ export function AiProvider({ children }: { children: React.ReactNode }) {
 
       setIsLoading(true);
 
-      // Construct API payload with the system prompt injected at the start
-      const apiMessages = [
+      // Build messages array with system prompt prepended
+      const apiMessages: Message[] = [
         { role: "system", content: systemPrompt },
         ...updatedMessages,
       ];
 
       try {
-        const headers: Record<string, string> = {};
-        if (settings.apiKey) {
-          headers.Authorization = `Bearer ${settings.apiKey}`;
+        let replyContent = "";
+
+        if (settings.provider === "ollama") {
+          replyContent = await callOllama(
+            settings.endpoint || "http://localhost:11434",
+            settings.model,
+            apiMessages,
+          );
+        } else if (settings.provider === "openai") {
+          if (!settings.apiKey) {
+            throw new Error(
+              "OpenAI API key is missing. Open AI Settings and add your key.",
+            );
+          }
+          replyContent = await callOpenAI(
+            settings.apiKey,
+            settings.model,
+            apiMessages,
+          );
+        } else if (settings.provider === "gemini") {
+          if (!settings.apiKey) {
+            throw new Error(
+              "Gemini API key is missing. Open AI Settings and add your key.",
+            );
+          }
+          replyContent = await callGemini(
+            settings.apiKey,
+            settings.model,
+            apiMessages,
+          );
         }
 
-        const backendUrl =
-          process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1";
-
-        const response = await axios.post(
-          `${backendUrl}/ai/chat`,
-          {
-            messages: apiMessages,
-            provider: settings.provider,
-            model: settings.model,
-            endpoint: settings.endpoint,
-          },
-          { headers },
-        );
-
-        const replyContent = response.data.content;
         const assistantMessage: Message = {
           role: "assistant",
-          content: replyContent,
+          content:
+            replyContent || "I received an empty response. Please try again.",
         };
 
         const finalMessages = [...updatedMessages, assistantMessage];
@@ -165,24 +279,23 @@ export function AiProvider({ children }: { children: React.ReactNode }) {
           "tourdesk-ai-messages",
           JSON.stringify(finalMessages),
         );
-        // biome-ignore lint/suspicious/noExplicitAny: error object has dynamic response fields
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error("AI Assistant error", error);
-        let errorMsg =
-          "Sorry, I encountered an error communicating with the AI. ";
-        if (error.response?.data?.detail) {
-          errorMsg += `Detail: ${error.response.data.detail}`;
-        } else {
-          errorMsg +=
-            "Please check your AI Settings (model name, endpoint, or API Key) and ensure Ollama or your cloud provider is accessible.";
-        }
+        const errMsg =
+          error instanceof Error
+            ? error.message
+            : "Unexpected error. Please try again.";
 
         const assistantMessage: Message = {
           role: "assistant",
-          content: errorMsg,
+          content: `⚠️ ${errMsg}`,
         };
         const finalMessages = [...updatedMessages, assistantMessage];
         setMessages(finalMessages);
+        window.localStorage.setItem(
+          "tourdesk-ai-messages",
+          JSON.stringify(finalMessages),
+        );
       } finally {
         setIsLoading(false);
       }

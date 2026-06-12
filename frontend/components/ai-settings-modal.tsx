@@ -239,6 +239,16 @@ export default function AiSettingsModal() {
                   placeholder="e.g. http://localhost:11434"
                   className="td-input"
                 />
+                <p className="text-[10px] text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 flex items-start gap-1.5 mt-1">
+                  <Info size={12} className="shrink-0 mt-0.5" />
+                  <span>
+                    Ollama must be started with CORS enabled:{" "}
+                    <code className="font-mono bg-amber-100 px-1 rounded">
+                      OLLAMA_ORIGINS=* ollama serve
+                    </code>
+                    . Otherwise browser requests will be blocked.
+                  </span>
+                </p>
               </div>
             )}
 

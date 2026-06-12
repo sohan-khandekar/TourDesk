@@ -102,6 +102,26 @@ export default function AiAssistantDrawer() {
   };
 
   const renderMessageContent = (content: string) => {
+    // Error messages from the provider start with ⚠️
+    if (content.startsWith("⚠️")) {
+      return (
+        <div className="space-y-2">
+          <p className="text-red-600 font-bold text-xs flex items-center gap-1.5">
+            <span>⚠️</span> AI Error
+          </p>
+          <p className="text-slate-700 text-sm leading-relaxed">
+            {content.replace("⚠️ ", "")}
+          </p>
+          <button
+            type="button"
+            onClick={() => setSettingsOpen(true)}
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-orange-600 hover:text-orange-700 underline underline-offset-2 transition-colors"
+          >
+            <Settings size={12} /> Open AI Settings
+          </button>
+        </div>
+      );
+    }
     const lines = content.split("\n");
     return (
       <div className="space-y-1.5">

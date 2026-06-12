@@ -2,7 +2,10 @@ from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException, Query
 
-from ...core.data_loader import get_place_by_id, get_places_by_category, get_places_by_city
+from ...core.data_loader import (
+    get_place_by_id,
+    get_places_by_city,
+)
 
 router = APIRouter(prefix="/places", tags=["places"])
 
@@ -15,7 +18,9 @@ async def list_places(
 ) -> list[dict]:
     places = get_places_by_city(city)
     if not places:
-        raise HTTPException(status_code=404, detail=f"No places found for city '{city}'")
+        raise HTTPException(
+            status_code=404, detail=f"No places found for city '{city}'"
+        )
 
     if category and category != "all":
         places = [p for p in places if p["category"] == category]
@@ -23,8 +28,7 @@ async def list_places(
     if search:
         q = search.lower()
         places = [
-            p for p in places
-            if q in p["name"].lower() or q in p["description"].lower()
+            p for p in places if q in p["name"].lower() or q in p["description"].lower()
         ]
 
     return places

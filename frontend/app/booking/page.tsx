@@ -1,5 +1,6 @@
 "use client";
 import Navbar from "@/components/navbar";
+import { PlaceReviews } from "@/components/place-reviews";
 import { PLACES_DATA } from "@/data/places";
 import { cn } from "@/lib/utils";
 import {
@@ -69,7 +70,7 @@ function BookingContent() {
   const officialUrl = place.bookingLink || place.officialInfoLink;
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Navbar />
       <div className="pt-16">
         <div className="h-1 bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500" />
@@ -89,12 +90,12 @@ function BookingContent() {
                 {place.emoji}
               </div>
 
-              <div className="bg-white rounded-2xl border border-slate-100 p-5 space-y-4 shadow-sm">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-5 space-y-4 shadow-sm">
                 <div>
                   <span className="text-xs font-bold bg-orange-100 text-orange-700 px-2.5 py-0.5 rounded-full capitalize">
                     {place.category.replace("_", " ")}
                   </span>
-                  <h1 className="text-xl font-black text-navy-900 mt-2 leading-tight">
+                  <h1 className="text-xl font-black text-navy-900 dark:text-white mt-2 leading-tight">
                     {place.name}
                   </h1>
                   <div className="flex items-center gap-1 text-slate-400 text-xs mt-1">
@@ -116,11 +117,14 @@ function BookingContent() {
                       icon: Calendar,
                     },
                   ].map(({ label, val, icon: Icon }) => (
-                    <div key={label} className="bg-slate-50 rounded-xl p-3">
+                    <div
+                      key={label}
+                      className="bg-slate-50 dark:bg-slate-950 rounded-xl p-3"
+                    >
                       <div className="flex items-center gap-1 text-slate-400 text-[10px] mb-1">
                         <Icon size={10} /> {label}
                       </div>
-                      <p className="text-xs font-semibold text-slate-700 leading-snug">
+                      <p className="text-xs font-semibold text-slate-700 dark:text-slate-350 leading-snug">
                         {val}
                       </p>
                     </div>
@@ -150,8 +154,8 @@ function BookingContent() {
             </div>
 
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-                <div className="px-6 py-5 border-b border-slate-100 flex items-center gap-3">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3">
                   <div
                     className={cn(
                       "w-10 h-10 rounded-xl flex items-center justify-center",
@@ -165,7 +169,7 @@ function BookingContent() {
                     )}
                   </div>
                   <div>
-                    <h2 className="font-black text-navy-900 text-lg">
+                    <h2 className="font-black text-navy-900 dark:text-white text-lg">
                       {isFood
                         ? "Popular dishes to try"
                         : "Official ticket redirect"}
@@ -185,9 +189,9 @@ function BookingContent() {
                         {(place.dishesToTry ?? place.highlights).map((dish) => (
                           <div
                             key={dish}
-                            className="rounded-xl border border-rose-100 bg-rose-50 p-4"
+                            className="rounded-xl border border-rose-100 dark:border-rose-950/40 bg-rose-50 dark:bg-rose-950/20 p-4"
                           >
-                            <p className="font-black text-rose-800 text-sm flex items-center gap-2">
+                            <p className="font-black text-rose-800 dark:text-rose-300 text-sm flex items-center gap-2">
                               <UtensilsCrossed size={14} /> {dish}
                             </p>
                           </div>
@@ -218,16 +222,16 @@ function BookingContent() {
                     </div>
                   ) : (
                     <div className="space-y-5">
-                      <div className="rounded-2xl border border-orange-100 bg-orange-50 p-5">
+                      <div className="rounded-2xl border border-orange-100 dark:border-orange-950/40 bg-orange-50 dark:bg-orange-950/20 p-5">
                         <p className="text-xs font-black text-orange-500 uppercase tracking-wider mb-3">
                           Price structure
                         </p>
-                        <p className="text-sm text-slate-700 leading-relaxed mb-4">
+                        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
                           {place.priceDetails}
                         </p>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <div className="bg-white rounded-xl border border-orange-100 p-4">
+                          <div className="bg-white dark:bg-slate-950 rounded-xl border border-orange-100 dark:border-orange-950/50 p-4">
                             <p className="text-xs text-slate-400 font-bold mb-1">
                               Adult starts from
                             </p>
@@ -241,7 +245,7 @@ function BookingContent() {
                               </p>
                             )}
                           </div>
-                          <div className="bg-white rounded-xl border border-orange-100 p-4">
+                          <div className="bg-white dark:bg-slate-950 rounded-xl border border-orange-100 dark:border-orange-950/50 p-4">
                             <p className="text-xs text-slate-400 font-bold mb-1">
                               Child starts from
                             </p>
@@ -259,25 +263,25 @@ function BookingContent() {
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                        <div className="rounded-xl border border-slate-100 dark:border-slate-850 bg-slate-50 dark:bg-slate-950 p-4">
                           <p className="text-xs text-slate-400 font-bold uppercase mb-1">
                             Location
                           </p>
-                          <p className="text-sm font-semibold text-slate-700">
+                          <p className="text-sm font-semibold text-slate-700 dark:text-slate-350">
                             {place.location}
                           </p>
                         </div>
-                        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                        <div className="rounded-xl border border-slate-100 dark:border-slate-850 bg-slate-50 dark:bg-slate-950 p-4">
                           <p className="text-xs text-slate-400 font-bold uppercase mb-1">
                             Timings
                           </p>
-                          <p className="text-sm font-semibold text-slate-700">
+                          <p className="text-sm font-semibold text-slate-700 dark:text-slate-350">
                             {place.timings}
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex items-start gap-2 text-xs text-slate-500 bg-slate-50 rounded-xl p-3">
+                      <div className="flex items-start gap-2 text-xs text-slate-500 bg-slate-50 dark:bg-slate-950 rounded-xl p-3">
                         <ShieldCheck
                           size={13}
                           className="flex-shrink-0 mt-0.5 text-emerald-500"
@@ -312,6 +316,7 @@ function BookingContent() {
               </div>
             </div>
           </div>
+          <PlaceReviews placeId={place.id} />
         </div>
       </div>
     </div>

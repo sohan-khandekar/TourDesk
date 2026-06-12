@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 
-APP_NAME   = "TourDesk API"
+APP_NAME = "TourDesk API"
 API_PREFIX = "/api/v1"
 
 ALLOWED_ORIGINS: list[str] = [

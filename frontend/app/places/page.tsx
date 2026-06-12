@@ -77,7 +77,7 @@ function PlacesContent() {
   const cityLabel = city.charAt(0).toUpperCase() + city.slice(1);
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Navbar />
 
       {/* ── Sub-header ── */}
@@ -109,13 +109,13 @@ function PlacesContent() {
           </p>
 
           {/* Search */}
-          <div className="flex items-center bg-white rounded-xl shadow-lg max-w-lg overflow-hidden">
+          <div className="flex items-center bg-white dark:bg-slate-900 border dark:border-slate-800 rounded-xl shadow-lg max-w-lg overflow-hidden">
             <Search size={16} className="ml-4 text-slate-400 flex-shrink-0" />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search places, monuments, parks, dishes…"
-              className="flex-1 px-3 py-3.5 text-sm text-slate-800 focus:outline-none placeholder-slate-400"
+              className="flex-1 px-3 py-3.5 text-sm text-slate-800 dark:text-white bg-transparent focus:outline-none placeholder-slate-400"
             />
             {search && (
               <button
@@ -141,8 +141,8 @@ function PlacesContent() {
               className={cn(
                 "cat-pill",
                 category === id
-                  ? "bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-100"
-                  : "bg-white text-slate-600 border-slate-200 hover:border-orange-300 hover:text-orange-600",
+                  ? "bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-100 dark:shadow-none"
+                  : "bg-white dark:bg-slate-900 text-slate-650 dark:text-slate-350 border-slate-200 dark:border-slate-800 hover:border-orange-300 hover:text-orange-600",
               )}
             >
               <Icon size={14} />
@@ -160,7 +160,9 @@ function PlacesContent() {
         <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
           <p className="text-sm text-slate-500">
             Showing{" "}
-            <span className="font-bold text-slate-800">{filtered.length}</span>{" "}
+            <span className="font-bold text-slate-800 dark:text-white">
+              {filtered.length}
+            </span>{" "}
             places
             {search && (
               <span>
@@ -175,8 +177,8 @@ function PlacesContent() {
             className={cn(
               "flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-semibold transition-all",
               showVisited
-                ? "bg-orange-50 border-orange-300 text-orange-700"
-                : "bg-white border-slate-200 text-slate-600 hover:border-orange-200 hover:text-orange-600",
+                ? "bg-orange-50 dark:bg-orange-950/20 border-orange-300 dark:border-orange-900 text-orange-700 dark:text-orange-300"
+                : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-350 hover:border-orange-200 hover:text-orange-600 dark:hover:bg-slate-800",
             )}
           >
             <Heart

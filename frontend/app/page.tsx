@@ -178,7 +178,7 @@ export default function HomePage() {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       {/* ════════════════════════════════════════
           HERO — background image
       ════════════════════════════════════════ */}
@@ -277,10 +277,10 @@ export default function HomePage() {
           <span className="text-orange-500 text-sm font-bold uppercase tracking-widest">
             Choose Your City
           </span>
-          <h2 className="text-4xl font-black text-navy-900 mt-2">
+          <h2 className="text-4xl font-black text-navy-900 dark:text-white mt-2">
             Where do you want to explore?
           </h2>
-          <p className="text-slate-500 mt-3 max-w-lg mx-auto">
+          <p className="text-slate-500 dark:text-slate-400 mt-3 max-w-lg mx-auto">
             Pick a destination — browse tourist spots, filter by your interests,
             and continue to the official ticket portal where available.
           </p>
@@ -297,10 +297,12 @@ export default function HomePage() {
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <h3 className="text-2xl font-black text-navy-900 group-hover:text-orange-600 transition-colors">
+                      <h3 className="text-2xl font-black text-navy-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                         {city.name}
                       </h3>
-                      <p className="text-slate-500 text-sm">{city.state}</p>
+                      <p className="text-slate-500 dark:text-slate-400 text-sm">
+                        {city.state}
+                      </p>
                     </div>
                     <span className="text-xs font-bold bg-orange-500 text-white px-2.5 py-1 rounded-full">
                       LIVE
@@ -310,7 +312,7 @@ export default function HomePage() {
                     &ldquo;{city.tagline}&rdquo;
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-slate-600 bg-white px-3 py-1.5 rounded-full border border-slate-200">
+                    <span className="text-sm font-semibold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700">
                       {city.places} tourist places
                     </span>
                     <span className="flex items-center gap-1 text-orange-500 text-sm font-bold group-hover:gap-2 transition-all">
@@ -323,15 +325,17 @@ export default function HomePage() {
             ) : (
               <div
                 key={city.id}
-                className="relative rounded-2xl border border-slate-100 bg-slate-50 p-6 opacity-60 cursor-not-allowed"
+                className="relative rounded-2xl border border-slate-100 dark:border-slate-900 bg-slate-50 dark:bg-slate-900/30 p-6 opacity-60 cursor-not-allowed"
               >
-                <span className="absolute top-3 right-3 text-xs font-bold bg-slate-200 text-slate-500 px-2.5 py-1 rounded-full">
+                <span className="absolute top-3 right-3 text-xs font-bold bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-2.5 py-1 rounded-full">
                   Coming Soon
                 </span>
-                <h3 className="text-xl font-black text-slate-500 mb-1">
+                <h3 className="text-xl font-black text-slate-500 dark:text-slate-400 mb-1">
                   {city.name}
                 </h3>
-                <p className="text-slate-400 text-sm">{city.state}</p>
+                <p className="text-slate-400 dark:text-slate-500 text-sm">
+                  {city.state}
+                </p>
                 <p className="text-slate-400 italic text-sm mt-1">
                   &ldquo;{city.tagline}&rdquo;
                 </p>
@@ -344,13 +348,13 @@ export default function HomePage() {
       {/* ════════════════════════════════════════
           CATEGORIES
       ════════════════════════════════════════ */}
-      <section className="bg-slate-50 border-y border-slate-100 py-20">
+      <section className="bg-slate-50 dark:bg-slate-900/30 border-y border-slate-100 dark:border-slate-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-orange-500 text-sm font-bold uppercase tracking-widest">
               Browse by Category
             </span>
-            <h2 className="text-4xl font-black text-navy-900 mt-2">
+            <h2 className="text-4xl font-black text-navy-900 dark:text-white mt-2">
               Every kind of experience
             </h2>
           </div>
@@ -360,7 +364,7 @@ export default function HomePage() {
                 key={id}
                 href={`/places?city=hyderabad&category=${id}`}
                 className={cn(
-                  "flex flex-col items-center gap-2.5 p-4 rounded-2xl border card-lift bg-white text-center",
+                  "flex flex-col items-center gap-2.5 p-4 rounded-2xl border dark:border-slate-800 card-lift bg-white dark:bg-slate-900 text-center",
                   border,
                 )}
               >
@@ -372,7 +376,7 @@ export default function HomePage() {
                 >
                   <Icon size={20} className={text} />
                 </div>
-                <span className="text-xs font-bold text-slate-700 leading-tight">
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-300 leading-tight">
                   {label}
                 </span>
               </Link>
@@ -389,7 +393,7 @@ export default function HomePage() {
           <span className="text-orange-500 text-sm font-bold uppercase tracking-widest">
             Simple Process
           </span>
-          <h2 className="text-4xl font-black text-navy-900 mt-2">
+          <h2 className="text-4xl font-black text-navy-900 dark:text-white mt-2">
             Plan in 3 easy steps
           </h2>
         </div>
@@ -416,18 +420,22 @@ export default function HomePage() {
           ].map(({ n, title, desc, icon: Icon }) => (
             <div
               key={n}
-              className="flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-slate-100 card-lift"
+              className="flex flex-col items-center text-center p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-850 card-lift"
             >
               <div className="relative mb-5">
-                <div className="w-16 h-16 rounded-2xl bg-orange-500 flex items-center justify-center shadow-lg shadow-orange-100">
+                <div className="w-16 h-16 rounded-2xl bg-orange-500 flex items-center justify-center shadow-lg shadow-orange-100 dark:shadow-none">
                   <Icon size={26} className="text-white" />
                 </div>
                 <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-navy-900 text-white text-[10px] font-black flex items-center justify-center">
                   {n}
                 </span>
               </div>
-              <h3 className="text-lg font-black text-navy-900 mb-2">{title}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
+              <h3 className="text-lg font-black text-navy-900 dark:text-white mb-2">
+                {title}
+              </h3>
+              <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                {desc}
+              </p>
             </div>
           ))}
         </div>

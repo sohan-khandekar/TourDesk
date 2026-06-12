@@ -74,24 +74,28 @@ export default function PlaceCard({
   const isFood = place.category === "food";
   const hasExternalTicket = Boolean(place.bookingLink);
 
+  const detailsUrl = `/booking?place=${place.id}&city=${place.city}`;
+
   return (
     <div
       className={cn(
-        "group relative bg-white rounded-2xl overflow-hidden border card-lift flex flex-col",
+        "group relative bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border card-lift flex flex-col",
         isVisited
-          ? "border-orange-300 ring-1 ring-orange-200"
-          : "border-slate-100",
+          ? "border-orange-300 ring-1 ring-orange-200 dark:border-orange-950 dark:ring-orange-900/50"
+          : "border-slate-100 dark:border-slate-800",
       )}
     >
       <div className="relative h-48 bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden flex-shrink-0">
-        <div
-          className="absolute inset-0 flex items-center justify-center text-[72px] select-none
-                        group-hover:scale-110 transition-transform duration-500"
-        >
-          {place.emoji}
-        </div>
+        <Link href={detailsUrl} className="absolute inset-0 block">
+          <div
+            className="absolute inset-0 flex items-center justify-center text-[72px] select-none
+                          group-hover:scale-110 transition-transform duration-500"
+          >
+            {place.emoji}
+          </div>
+        </Link>
 
-        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/30 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
 
         <span
           className={cn(
@@ -109,7 +113,7 @@ export default function PlaceCard({
             e.preventDefault();
             onToggleVisited();
           }}
-          className="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-transform"
+          className="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-transform z-10"
           title={isVisited ? "Remove from visited" : "Mark as visited"}
         >
           <Heart
@@ -134,25 +138,27 @@ export default function PlaceCard({
       </div>
 
       <div className="p-4 flex flex-col flex-1">
-        <h3 className="font-black text-navy-900 text-[15px] leading-tight group-hover:text-orange-600 transition-colors mb-1">
-          {place.name}
-        </h3>
+        <Link href={detailsUrl} className="block hover:underline">
+          <h3 className="font-black text-navy-900 dark:text-white text-[15px] leading-tight group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors mb-1">
+            {place.name}
+          </h3>
+        </Link>
 
-        <div className="flex items-center gap-1 text-slate-400 text-xs mb-2">
+        <div className="flex items-center gap-1 text-slate-400 dark:text-slate-450 text-xs mb-2">
           <MapPin size={10} className="flex-shrink-0" />
           <span className="truncate">{place.location}</span>
         </div>
 
-        <p className="text-slate-500 text-sm line-clamp-2 leading-relaxed mb-3 flex-1">
+        <p className="text-slate-500 dark:text-slate-400 text-sm line-clamp-2 leading-relaxed mb-3 flex-1">
           {place.description}
         </p>
 
         {isFood && place.dishesToTry?.length ? (
-          <div className="mb-3 rounded-xl bg-rose-50 border border-rose-100 p-2.5">
+          <div className="mb-3 rounded-xl bg-rose-50 dark:bg-rose-950/20 border border-rose-100 dark:border-rose-950/40 p-2.5">
             <p className="text-[10px] font-black uppercase tracking-wider text-rose-500 mb-1.5">
               Famous dishes
             </p>
-            <p className="text-xs text-rose-800 font-semibold line-clamp-2">
+            <p className="text-xs text-rose-800 dark:text-rose-300 font-semibold line-clamp-2">
               {place.dishesToTry.slice(0, 4).join(" • ")}
             </p>
           </div>
@@ -166,7 +172,7 @@ export default function PlaceCard({
           </span>
         </div>
 
-        <div className="flex items-center justify-between pt-3 border-t border-slate-100 gap-3">
+        <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800 gap-3">
           <div className="min-w-0">
             {isFood ? (
               <span className="text-rose-600 font-black text-sm flex items-center gap-1">
@@ -179,8 +185,11 @@ export default function PlaceCard({
             ) : (
               <div className="flex items-baseline gap-0.5">
                 <span className="text-slate-400 text-xs mr-0.5">from</span>
-                <IndianRupee size={13} className="text-navy-800" />
-                <span className="font-black text-navy-800 text-lg leading-none">
+                <IndianRupee
+                  size={13}
+                  className="text-navy-800 dark:text-orange-400"
+                />
+                <span className="font-black text-navy-800 dark:text-orange-400 text-lg leading-none">
                   {place.ticketPrice}
                 </span>
               </div>
@@ -189,25 +198,15 @@ export default function PlaceCard({
 
           {isFood ? (
             <Link
-              href={`/booking?place=${place.id}&city=${place.city}`}
+              href={detailsUrl}
               className="btn-outline flex items-center gap-1.5 px-3 py-2 text-xs rounded-xl whitespace-nowrap"
             >
               Dishes
             </Link>
-          ) : hasExternalTicket ? (
-            <a
-              href={place.bookingLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary flex items-center gap-1.5 px-3 py-2 text-xs rounded-xl whitespace-nowrap"
-            >
-              <ExternalLink size={12} />
-              Official
-            </a>
           ) : (
             <Link
-              href={`/booking?place=${place.id}&city=${place.city}`}
-              className="btn-outline flex items-center gap-1.5 px-3 py-2 text-xs rounded-xl whitespace-nowrap"
+              href={detailsUrl}
+              className="btn-primary flex items-center gap-1.5 px-3 py-2 text-xs rounded-xl whitespace-nowrap"
             >
               <Ticket size={12} />
               Details

@@ -1,29 +1,30 @@
 from __future__ import annotations
 
+import httpx
 from fastapi import APIRouter, Header, HTTPException
 from pydantic import BaseModel
-from typing import List, Optional
-import httpx
 
 router = APIRouter(prefix="/ai", tags=["ai"])
+
 
 class ChatMessage(BaseModel):
     role: str
     content: str
 
+
 class ChatPayload(BaseModel):
-    messages: List[ChatMessage]
+    messages: list[ChatMessage]
     provider: str
     model: str
-    endpoint: Optional[str] = None
+    endpoint: str | None = None
+
 
 @router.post("/chat")
 async def chat_proxy(
-    payload: ChatPayload,
-    authorization: str | None = Header(None)
+    payload: ChatPayload, authorization: str | None = Header(None)
 ) -> dict:
     api_key = authorization.replace("Bearer ", "") if authorization else None
-    
+
     async with httpx.AsyncClient(timeout=60.0) as client:
         # 1. Ollama (Local)
         if payload.provider == "ollama":
@@ -31,7 +32,7 @@ async def chat_proxy(
             body = {
                 "model": payload.model,
                 "messages": [m.model_dump() for m in payload.messages],
-                "stream": False
+                "stream": False,
             }
             try:
                 response = await client.post(url, json=body)
@@ -49,7 +50,7 @@ async def chat_proxy(
             headers = {"Authorization": f"Bearer {api_key}"}
             body = {
                 "model": payload.model,
-                "messages": [m.model_dump() for m in payload.messages]
+                "messages": [m.model_dump() for m in payload.messages],
             }
             try:
                 response = await client.post(url, headers=headers, json=body)
@@ -67,10 +68,7 @@ async def chat_proxy(
             contents = []
             for msg in payload.messages:
                 role = "model" if msg.role == "assistant" else "user"
-                contents.append({
-                    "role": role,
-                    "parts": [{"text": msg.content}]
-                })
+                contents.append({"role": role, "parts": [{"text": msg.content}]})
             try:
                 response = await client.post(url, json={"contents": contents})
                 response.raise_for_status()
